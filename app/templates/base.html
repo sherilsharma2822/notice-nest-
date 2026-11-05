@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Notices{% endblock %} - NoticeNest</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="{{ url_for('main.dashboard') }}">NoticeNest</a>
+      <nav aria-label="Main">
+        <a href="{{ url_for('main.dashboard') }}">Notices</a>
+        <a href="{{ url_for('main.changes_page') }}">What changed</a>
+        <a href="{{ url_for('main.profile') }}">{{ 'My profile' if session.get('user_id') else 'Set up profile' }}</a>
+        <a href="{{ url_for('main.metrics') }}">Accuracy</a>
+        <a href="{{ url_for('main.about') }}">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flashes" role="status">
+          {% for category, message in messages %}
+            <p class="flash flash-{{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="wrap site-footer">
+    <p>NoticeNest reads public notices with software, and software can make mistakes.
+       Always confirm dates on the official notice before you act.</p>
+  </footer>
+</body>
+</html>

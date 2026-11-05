@@ -1,0 +1,5 @@
+# Only needed if you want OCR for scanned PDF notices (see docs/SETUP_GUIDE.md).
+# You must also install the Tesseract program and Poppler on your computer.
+pytesseract>=0.3
+pdf2image>=1.17
+Pillow>=10.0

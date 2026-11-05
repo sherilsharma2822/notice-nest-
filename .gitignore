@@ -1,0 +1,23 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Local data (created when you run the app)
+data/noticenest.db
+data/.demo_anchor
+data/downloads/*
+!data/downloads/.gitkeep
+eval/results/*
+!eval/results/.gitkeep
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

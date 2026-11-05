@@ -1,0 +1,10 @@
+Title: Payment of Semester Fee for B.Tech 2nd, 4th and 6th Semester (Even Semester)
+Date: {{-1}}
+---
+DEMO UNIVERSITY - ACCOUNTS SECTION
+
+Students of B.Tech 2nd, 4th and 6th semester are required to deposit the semester fee through the online payment portal.
+
+Fee without fine: Rs. 42,500 up to {{+7}}.
+A late fine of Rs. 1,000 will be charged if the fee is deposited between {{+8}} and {{+14}}.
+No payment will be accepted after {{+14}}.

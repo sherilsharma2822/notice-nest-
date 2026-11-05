@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% from "_macros.html" import stub, chips with context %}
+{% block title %}Notices{% endblock %}
+{% block content %}
+
+{% if not user %}
+  <section class="intro">
+    <h1>Your university's notices, sorted by what you must do next</h1>
+    <p>NoticeNest reads each new notice, finds the dates and fees, and shows only what applies to your course and semester.</p>
+    <p><a class="button" href="{{ url_for('main.profile') }}">Set up my profile</a></p>
+  </section>
+{% else %}
+  <section class="intro intro-small">
+    <h1>Hello, {{ user['name'].split()[0] }}</h1>
+    <p class="muted">Showing notices for {{ user['course'] }}, semester {{ user['semester'] }}.
+      <a href="{{ url_for('main.calendar') }}">Add my deadlines to my calendar</a></p>
+  </section>
+{% endif %}
+
+<section aria-labelledby="coming-h">
+  <h2 id="coming-h">Coming up</h2>
+  {% if coming %}
+    <ol class="ledger">
+      {% for item in coming %}
+        {% set d = item.deadline %}{% set n = item.notice %}
+        <li class="row">
+          {{ stub(d.date, d.days_left) }}
+          <div class="row-body">
+            <p class="row-title"><a href="{{ url_for('main.notice_page', notice_id=n.id) }}">{{ d.label }}</a></p>
+            <p class="row-sub">{{ n.title }}</p>
+            <p class="chips">
+              {% if d.verified %}<span class="chip chip-ok">Date found in the notice</span>
+              {% else %}<span class="chip chip-review">Please check this date</span>{% endif %}
+              {% if n.match == 'maybe' %}<span class="chip chip-maybe">May apply to you</span>{% endif %}
+            </p>
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p class="empty">
+      {% if total == 0 %}No notices have been collected yet. In a terminal, run <code>python -m app.jobs.run_once</code>.
+      {% else %}No upcoming deadlines for you in the next 60 days.{% endif %}
+    </p>
+  {% endif %}
+</section>
+
+<section aria-labelledby="latest-h">
+  <h2 id="latest-h">Latest notices</h2>
+  <nav class="filters" aria-label="Filter by type">
+    <a class="{{ 'on' if not ntype }}" href="{{ url_for('main.dashboard', all='1' if show_all else None) }}">All types</a>
+    {% for key, label in TYPE_LABELS.items() %}
+      <a class="{{ 'on' if ntype == key }}" href="{{ url_for('main.dashboard', type=key, all='1' if show_all else None) }}">{{ label }}</a>
+    {% endfor %}
+  </nav>
+  {% if user %}
+    <p class="muted small">
+      {% if show_all %}Showing notices for every course. <a href="{{ url_for('main.dashboard', type=ntype or None) }}">Show only mine</a>
+      {% else %}Notices clearly meant for other courses are hidden. <a href="{{ url_for('main.dashboard', type=ntype or None, all='1') }}">Show them anyway</a>{% endif %}
+    </p>
+  {% endif %}
+
+  {% if notices %}
+    <ol class="ledger">
+      {% for n in notices %}
+        <li class="row">
+          {{ stub(n.next_due, n.days_left) }}
+          <div class="row-body">
+            <p class="row-title"><a href="{{ url_for('main.notice_page', notice_id=n.id) }}">{{ n.title }}</a></p>
+            {% if n.summary %}<p class="row-sub">{{ n.summary }}</p>{% endif %}
+            {{ chips(n) }}
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p class="empty">No notices match this filter.</p>
+  {% endif %}
+</section>
+{% endblock %}

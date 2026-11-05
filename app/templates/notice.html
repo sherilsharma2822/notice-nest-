@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% from "_macros.html" import stub with context %}
+{% block title %}{{ n.title }}{% endblock %}
+{% block content %}
+<p class="crumb"><a href="{{ url_for('main.dashboard') }}">All notices</a></p>
+<h1>{{ n.title }}</h1>
+<p class="chips">
+  <span class="chip">{{ TYPE_LABELS.get(n.notice_type, 'Other') }}</span>
+  {% if n.match == 'maybe' %}<span class="chip chip-maybe">May apply to you</span>{% endif %}
+  {% if n.review_status == 'needs_review' %}<span class="chip chip-review">Needs review</span>
+  {% else %}<span class="chip chip-ok">Dates and fees found in the notice</span>{% endif %}
+</p>
+{% if n.summary %}<p class="lede">{{ n.summary }}</p>{% endif %}
+{% if n.action_required %}<p><strong>What to do:</strong> {{ n.action_required }}</p>{% endif %}
+
+<section>
+  <h2>Dates</h2>
+  {% if n.deadlines %}
+    <ol class="ledger">
+      {% for d in n.deadlines %}
+        <li class="row">
+          {{ stub(d.date if d.days_left >= 0 else none, d.days_left if d.days_left >= 0 else none) }}
+          <div class="row-body">
+            <p class="row-title">{{ d.label }}: {{ d.due_date|fmt_date }}{% if d.days_left < 0 %} (passed){% endif %}</p>
+            {% if d.snippet %}<blockquote class="snippet">{{ d.snippet }}</blockquote>{% endif %}
+            {% if d.verified %}<p class="chips"><span class="chip chip-ok">Date found in the notice</span></p>
+            {% else %}<p class="chips"><span class="chip chip-review">Not found in the notice text - please check</span></p>{% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p class="empty">No dates were found. Open the original notice to be sure.</p>
+  {% endif %}
+</section>
+
+{% if n.fees %}
+<section>
+  <h2>Fees</h2>
+  <ul class="plain">{% for f in n.fees %}<li>{{ f.label }}: Rs. {{ '{:,}'.format(f.amount) }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+<section>
+  <h2>Who it is for</h2>
+  <p>{{ n.applies_text }}{% if n.applies_to.batches %} (batch {{ n.applies_to.batches|join(', ') }}){% endif %}</p>
+</section>
+
+{% if n.issues %}
+<section>
+  <h2>Things to double-check</h2>
+  <ul class="plain">{% for issue in n.issues %}<li>{{ issue }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+{% if changes %}
+<section>
+  <h2>What changed</h2>
+  <ul class="plain">{% for c in changes %}<li>{{ c['summary'] }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+<section>
+  <h2>Original notice</h2>
+  <p>
+    {% if n.url and not n.url.startswith('local://') %}<a href="{{ n.url }}" rel="noopener noreferrer">Open the original notice</a>
+    {% else %}This is a demo notice stored on this computer.{% endif %}
+    <span class="muted small">From {{ n.source_name }}. Version {{ n.version }}.</span>
+  </p>
+  <details>
+    <summary>Show the text NoticeNest read</summary>
+    <pre class="rawtext">{{ n.raw_text }}</pre>
+  </details>
+</section>
+{% endblock %}

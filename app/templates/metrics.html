@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Accuracy{% endblock %}
+{% block content %}
+<h1>How accurate is it?</h1>
+<p class="lede">Accuracy is measured on notices whose correct answers were written by hand. Run <code>python -m eval.run_eval</code> to refresh the table.</p>
+
+{% if report %}
+  <p class="muted small">Measured {{ report.generated_at }}.</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Setup</th><th scope="col">Type correct</th><th scope="col">Who it is for</th>
+            <th scope="col">Date precision</th><th scope="col">Date recall</th><th scope="col">Fees found</th>
+            <th scope="col">Invented dates</th></tr>
+      </thead>
+      <tbody>
+        {% for name, r in report.setups.items() %}
+        <tr>
+          <th scope="row">{{ {'regex': 'Patterns only (basic mode)', 'llm_raw': 'AI, unchecked', 'llm_validated': 'AI + validator'}.get(name, name) }}</th>
+          <td>{{ (r.type_accuracy * 100)|round|int }}%</td>
+          <td>{{ (r.who_it_applies_to_accuracy * 100)|round|int }}%</td>
+          <td>{{ (r.deadlines.precision * 100)|round|int }}%</td>
+          <td>{{ (r.deadlines.recall * 100)|round|int }}%</td>
+          <td>{{ (r.fees.recall * 100)|round|int }}%</td>
+          <td>{{ r.invented_dates }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">Precision: of the dates shown, how many were right. Recall: of the real dates, how many were found.
+     Invented dates: dates that are not written anywhere in the notice.</p>
+{% else %}
+  <p class="empty">No evaluation has been run yet. Run <code>python -m eval.run_eval</code> in a terminal.</p>
+{% endif %}
+
+<h2>This installation</h2>
+<ul class="plain">
+  <li>{{ stats.notices }} notices collected, {{ stats.needs_review }} marked "needs review".</li>
+  <li>Extraction mode: {% for mode, count in stats.by_mode.items() %}{{ count }} by {{ 'AI' if mode == 'llm' else 'patterns' }}{{ ', ' if not loop.last }}{% else %}none yet{% endfor %}.</li>
+  <li>{{ stats.users }} students signed up, {{ stats.alerts_sent }} alerts sent.</li>
+  <li>{{ stats.llm_cache }} AI answers saved, so the same notice never costs a second AI call.</li>
+</ul>
+{% endblock %}

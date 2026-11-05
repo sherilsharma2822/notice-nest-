@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}What changed{% endblock %}
+{% block content %}
+<h1>What changed</h1>
+<p class="lede">Universities often extend or correct dates after publishing a notice. These are the revisions NoticeNest has spotted.</p>
+{% if changes %}
+  <ol class="ledger">
+    {% for c in changes %}
+      <li class="row row-flat">
+        <div class="row-body">
+          <p class="row-title"><a href="{{ url_for('main.notice_page', notice_id=c['notice_id']) }}">{{ c['title'] }}</a></p>
+          <p>{{ c['summary'] }}</p>
+          <p class="muted small">
+            {% if c['kind'] == 'revision_notice' and c['related_title'] %}This notice revises: {{ c['related_title'] }}.
+            {% else %}The notice was edited after it was first published.{% endif %}
+            Spotted {{ c['created_at'][:10]|fmt_date }}.
+          </p>
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+{% else %}
+  <p class="empty">No revisions spotted yet.</p>
+{% endif %}
+{% endblock %}

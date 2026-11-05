@@ -1,0 +1,204 @@
+[
+  {
+    "file": "01_exam_form_bca.txt",
+    "title": "Examination Form for BCA III and V Semester (Odd Semester 2026-27)",
+    "published": "2026-10-23",
+    "expected": {
+      "notice_type": "exam_form",
+      "all": false,
+      "courses": [
+        "BCA"
+      ],
+      "semesters": [
+        3,
+        5
+      ],
+      "deadlines": [
+        "2026-11-05",
+        "2026-11-12",
+        "2026-11-30"
+      ],
+      "fees": [
+        500,
+        1250
+      ]
+    }
+  },
+  {
+    "file": "02_fee_btech.txt",
+    "title": "Payment of Semester Fee for B.Tech 2nd, 4th and 6th Semester (Even Semester)",
+    "published": "2026-10-25",
+    "expected": {
+      "notice_type": "fee",
+      "all": false,
+      "courses": [
+        "BTECH"
+      ],
+      "semesters": [
+        2,
+        4,
+        6
+      ],
+      "deadlines": [
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-09"
+      ],
+      "fees": [
+        1000,
+        42500
+      ]
+    }
+  },
+  {
+    "file": "03_exam_form_bca_revised.txt",
+    "title": "Revised: Examination Form for BCA III and V Semester - last date extended",
+    "published": "2026-10-26",
+    "expected": {
+      "notice_type": "exam_form",
+      "all": false,
+      "courses": [
+        "BCA"
+      ],
+      "semesters": [
+        3,
+        5
+      ],
+      "deadlines": [
+        "2026-11-09",
+        "2026-11-16"
+      ],
+      "fees": [
+        500
+      ]
+    }
+  },
+  {
+    "file": "04_scholarship_all.txt",
+    "title": "Post Matric Scholarship Applications for the Session 2026-27",
+    "published": "2026-10-21",
+    "expected": {
+      "notice_type": "scholarship",
+      "all": true,
+      "courses": [],
+      "semesters": [],
+      "deadlines": [
+        "2026-11-15",
+        "2026-11-22"
+      ],
+      "fees": []
+    }
+  },
+  {
+    "file": "05_result_bca_sem2.txt",
+    "title": "Result of BCA II Semester Examination Declared",
+    "published": "2026-10-24",
+    "expected": {
+      "notice_type": "result",
+      "all": false,
+      "courses": [
+        "BCA"
+      ],
+      "semesters": [
+        2
+      ],
+      "deadlines": [
+        "2026-11-01"
+      ],
+      "fees": [
+        700
+      ]
+    }
+  },
+  {
+    "file": "06_timetable_mca.txt",
+    "title": "Time Table for MCA I Semester Examination",
+    "published": "2026-10-25",
+    "expected": {
+      "notice_type": "timetable",
+      "all": false,
+      "courses": [
+        "MCA"
+      ],
+      "semesters": [
+        1
+      ],
+      "deadlines": [
+        "2026-11-17",
+        "2026-11-23",
+        "2026-12-05"
+      ],
+      "fees": []
+    }
+  },
+  {
+    "file": "07_holiday.txt",
+    "title": "Holiday on account of the festival",
+    "published": "2026-10-22",
+    "expected": {
+      "notice_type": "holiday",
+      "all": true,
+      "courses": [],
+      "semesters": [],
+      "deadlines": [
+        "2026-10-31",
+        "2026-11-01"
+      ],
+      "fees": []
+    }
+  },
+  {
+    "file": "08_admission_mba.txt",
+    "title": "MBA Admission 2026: Counselling Schedule",
+    "published": "2026-10-20",
+    "expected": {
+      "notice_type": "admission",
+      "all": false,
+      "courses": [
+        "MBA"
+      ],
+      "semesters": [
+        1
+      ],
+      "deadlines": [
+        "2026-11-04",
+        "2026-11-11"
+      ],
+      "fees": [
+        25000
+      ]
+    }
+  },
+  {
+    "file": "09_hostel_circular.txt",
+    "title": "Circular regarding hostel allotment",
+    "published": "2026-10-24",
+    "expected": {
+      "notice_type": "other",
+      "all": false,
+      "courses": [],
+      "semesters": [],
+      "deadlines": [],
+      "fees": []
+    }
+  },
+  {
+    "file": "10_training_report.txt",
+    "title": "Submission of Industrial Training Report",
+    "published": "2026-10-24",
+    "expected": {
+      "notice_type": "other",
+      "all": false,
+      "courses": [
+        "BCA"
+      ],
+      "semesters": [
+        5
+      ],
+      "deadlines": [
+        "2026-11-07"
+      ],
+      "fees": []
+    }
+  }
+]

@@ -1,0 +1,7 @@
+Title: Holiday on account of the festival
+Date: {{-4}}
+---
+DEMO UNIVERSITY - REGISTRAR OFFICE
+
+The university offices and all departments will remain closed on {{+5:long}} on account of the festival holiday.
+Classes will resume on {{+6:long}}.

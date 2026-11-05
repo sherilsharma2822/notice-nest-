@@ -1,0 +1,146 @@
+/* NoticeNest styles.
+   Idea: a "deadline ledger". Every row starts with a date stub (big day number),
+   because the first thing a student wants to know is WHEN.
+   Colours:  ink #16202C   ground #F2F4F7   rule #D5DAE1   cobalt #2147C9
+             red #B3261E   amber #A85B00   green #146C43   slate #5A6675          */
+
+:root {
+  --ink: #16202C;
+  --slate: #5A6675;
+  --ground: #F2F4F7;
+  --paper: #FFFFFF;
+  --rule: #D5DAE1;
+  --cobalt: #2147C9;
+  --red: #B3261E;
+  --amber: #A85B00;
+  --green: #146C43;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.wrap { width: min(100% - 2rem, 50rem); margin-inline: auto; }
+
+a { color: var(--cobalt); text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; border-radius: 2px; }
+
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--paper); padding: 0.5rem 1rem; z-index: 10; }
+.skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+/* ---- header ---- */
+.site-header { background: var(--paper); border-bottom: 1px solid var(--rule); }
+.bar { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1.5rem; padding-block: 0.9rem; }
+.brand { font-family: var(--serif); font-size: 1.45rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+.site-header nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; }
+.site-header nav a { color: var(--ink); text-decoration: none; padding-block: 0.15rem; border-bottom: 2px solid transparent; }
+.site-header nav a:hover { border-bottom-color: var(--cobalt); }
+
+main { padding-block: 1.5rem 3rem; }
+
+/* ---- text ---- */
+h1, h2, h3 { font-family: var(--serif); line-height: 1.2; margin: 0 0 0.6rem; }
+h1 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); }
+h2 { font-size: 1.35rem; margin-top: 2rem; }
+.lede { font-size: 1.1rem; max-width: 40rem; }
+.muted { color: var(--slate); }
+.small { font-size: 0.9rem; }
+code { background: var(--paper); border: 1px solid var(--rule); padding: 0.05em 0.35em; border-radius: 3px; font-size: 0.92em; }
+.breakable { overflow-wrap: anywhere; }
+.crumb { margin: 0 0 0.5rem; font-size: 0.95rem; }
+.plain { padding-left: 1.2rem; margin: 0.4rem 0; }
+.steps { padding-left: 1.4rem; max-width: 40rem; }
+.steps li { margin-bottom: 0.5rem; }
+.empty { color: var(--slate); padding: 1rem 0; }
+
+.intro { margin-bottom: 1rem; max-width: 40rem; }
+.intro-small p { margin: 0; }
+
+/* ---- buttons and forms ---- */
+.button {
+  display: inline-block; background: var(--cobalt); color: #fff; border: 2px solid var(--cobalt);
+  padding: 0.6rem 1.2rem; font: inherit; font-weight: 600; border-radius: 4px; cursor: pointer; text-decoration: none;
+}
+.button:hover { background: #17369b; border-color: #17369b; }
+.button-quiet { background: transparent; color: var(--red); border-color: var(--red); }
+.button-quiet:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+.form { display: grid; gap: 0.35rem; max-width: 28rem; margin-top: 1rem; }
+.form label { font-weight: 600; margin-top: 0.7rem; }
+.form input, .form select {
+  font: inherit; padding: 0.55rem 0.6rem; border: 1px solid #8a94a3; border-radius: 4px; background: var(--paper); color: var(--ink);
+}
+.form button { margin-top: 1.2rem; justify-self: start; }
+
+.flashes { margin-bottom: 1rem; }
+.flash { padding: 0.6rem 0.9rem; margin: 0 0 0.4rem; border-left: 4px solid var(--cobalt); background: var(--paper); }
+.flash-error { border-left-color: var(--red); }
+.flash-ok { border-left-color: var(--green); }
+
+/* ---- the ledger ---- */
+.ledger { list-style: none; margin: 0.5rem 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.row { display: grid; grid-template-columns: 5.2rem 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+.row-flat { grid-template-columns: 1fr; }
+.row-body { min-width: 0; }
+.row-title { margin: 0; font-weight: 700; font-size: 1.05rem; overflow-wrap: anywhere; }
+.row-sub { margin: 0.15rem 0 0; color: var(--slate); }
+
+/* the date stub */
+.stub {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  background: var(--paper); border: 1px solid var(--rule); border-left: 5px solid var(--slate);
+  padding: 0.4rem 0.2rem; align-self: start;
+}
+.stub-day { font-family: var(--serif); font-size: 2rem; line-height: 1; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stub-month { font-size: 0.95rem; font-weight: 600; }
+.stub-left { font-size: 0.78rem; color: var(--slate); margin-top: 0.2rem; }
+.stub-none { font-size: 0.85rem; color: var(--slate); padding: 0.8rem 0; }
+.stub-soon { border-left-color: var(--amber); }
+.stub-soon .stub-left { color: var(--amber); font-weight: 600; }
+.stub-urgent { border-left-color: var(--red); }
+.stub-urgent .stub-left { color: var(--red); font-weight: 700; }
+
+/* ---- chips ---- */
+.chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.45rem 0 0; padding: 0; }
+.chip { font-size: 0.85rem; padding: 0.1rem 0.55rem; border: 1px solid var(--rule); background: var(--paper); border-radius: 99px; }
+.chip-ok { border-color: var(--green); color: var(--green); }
+.chip-maybe { border-color: var(--amber); color: var(--amber); }
+.chip-review { border-color: var(--red); color: var(--red); font-weight: 600; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.3rem 0 0.8rem; }
+.filters a { padding: 0.15rem 0.7rem; border: 1px solid var(--rule); background: var(--paper); border-radius: 99px; text-decoration: none; color: var(--ink); font-size: 0.92rem; }
+.filters a.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* ---- notice page ---- */
+.snippet { margin: 0.4rem 0 0; padding: 0.2rem 0.8rem; border-left: 3px solid var(--rule); color: var(--slate); font-style: italic; }
+details { margin-top: 0.8rem; }
+summary { cursor: pointer; font-weight: 600; }
+.rawtext { white-space: pre-wrap; background: var(--paper); border: 1px solid var(--rule); padding: 0.8rem; overflow-wrap: anywhere; font-size: 0.9rem; max-height: 24rem; overflow: auto; }
+
+/* ---- table ---- */
+.table-scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 34rem; background: var(--paper); }
+th, td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--rule); text-align: left; }
+thead th { border-bottom: 2px solid var(--ink); font-size: 0.92rem; }
+tbody th { font-weight: 600; }
+
+.site-footer { padding-block: 1.5rem 2.5rem; border-top: 1px solid var(--rule); color: var(--slate); font-size: 0.92rem; }
+
+@media (max-width: 34rem) {
+  .row { grid-template-columns: 4.2rem 1fr; gap: 0.75rem; }
+  .stub-day { font-size: 1.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }

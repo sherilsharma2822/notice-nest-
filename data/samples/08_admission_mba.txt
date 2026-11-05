@@ -1,0 +1,9 @@
+Title: MBA Admission 2026: Counselling Schedule
+Date: {{-6}}
+---
+DEMO UNIVERSITY - ADMISSION CELL
+
+Counselling for admission to the MBA programme (first semester) will be held in two rounds.
+Round 1 counselling: {{+9}}.
+Round 2 counselling: {{+16}}.
+Candidates must pay the admission fee of Rs. 25,000 within three days of seat allotment.

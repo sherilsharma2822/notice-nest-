@@ -1,0 +1,8 @@
+Title: Time Table for MCA I Semester Examination
+Date: {{-1}}
+---
+DEMO UNIVERSITY - EXAMINATION BRANCH
+
+The theory examinations of MCA I Semester will commence from {{+28}} and end on {{+40}}.
+Examination centres and the seating plan will be displayed three days before the first paper.
+Admit cards can be downloaded from {{+22}}.

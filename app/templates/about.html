@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+<h1>How NoticeNest works</h1>
+<p class="lede">Official notices are often long PDFs. NoticeNest turns each one into a short card with the dates that matter to you.</p>
+
+<h2>The steps</h2>
+<ol class="steps">
+  <li>It checks the notice pages you configured, politely and not too often, and skips notices it has already seen.</li>
+  <li>It reads the notice text (PDF or web page).</li>
+  <li>It finds the type, dates, fees and who the notice is for. With an AI key it uses an AI model; without one it uses patterns.</li>
+  <li>A validator checks every date and fee against the notice text. Anything it cannot find is marked "needs review" instead of hidden.</li>
+  <li>It matches the notice to your course and semester and sends reminders 3 days before, 1 day before and on the day.</li>
+  <li>If a notice is edited or a revision is published, it shows what changed.</li>
+</ol>
+
+<h2>What it cannot promise</h2>
+<ul class="plain">
+  <li>It can miss a date or misread a scan. Always open the original notice before you act.</li>
+  <li>If a notice does not say who it is for, NoticeNest shows it as "may apply to you" so you do not miss it.</li>
+  <li>Only public notice text is ever sent to an AI service. Your profile stays on this computer.</li>
+</ul>
+{% endblock %}

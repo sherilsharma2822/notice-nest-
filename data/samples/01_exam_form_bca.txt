@@ -1,0 +1,15 @@
+Title: Examination Form for BCA III and V Semester (Odd Semester 2026-27)
+Date: {{-3}}
+---
+DEMO UNIVERSITY - EXAMINATION BRANCH
+Notice No. EX/2026/114
+
+All students of BCA III Semester and V Semester are informed that the online examination form for the odd semester examinations can be filled on the university portal.
+
+Last date for submission of examination form without late fee is {{+10}}.
+Last date with late fee of Rs. 500 is {{+17}}.
+Examination fee is Rs. 1,250 per semester, to be paid online.
+Theory examinations will commence from {{+35:long}}.
+
+Students must keep a printed copy of the confirmation page.
+Controller of Examinations

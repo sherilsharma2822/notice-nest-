@@ -1,0 +1,40 @@
+# Where NoticeNest looks for notices.
+# Each entry under "sources" is one website (or folder) to watch.
+#
+# kind: local      -> reads sample notices from a folder (great for demos and tests)
+# kind: html_list  -> scrapes a real notice page (see docs/SOURCES_GUIDE.md)
+
+sources:
+  # ---------------------------------------------------------------------------
+  # 1) Demo source: works offline, no scraping. Leave enabled while you learn.
+  # ---------------------------------------------------------------------------
+  - name: Demo University (sample notices)
+    kind: local
+    path: data/samples
+    enabled: true
+
+  # ---------------------------------------------------------------------------
+  # 2) Your real university. Copy this block, fill it in, then set enabled: true.
+  #    Use:  python tools/inspect_page.py <notice-page-url>   to find the selectors.
+  # ---------------------------------------------------------------------------
+  - name: My University - Notices
+    kind: html_list
+    enabled: false
+    url: https://your-university.example.edu/notices
+
+    # CSS selector for ONE notice row/item on the page (optional).
+    # Examples: "table tr", "ul.notice-list li", "div.notice-item"
+    item_selector: "table tr"
+
+    # CSS selector for the link inside each item (default: "a").
+    link_selector: "a"
+
+    # Where the notice title comes from: link_text or item_text.
+    title_from: link_text
+
+    # Optional: CSS selector (inside each item) that holds the notice date.
+    # If you leave it out, NoticeNest looks for a date anywhere in the item text.
+    date_selector: ""
+
+    # Optional: only keep links whose address (href) contains one of these words.
+    link_must_contain: [".pdf"]

@@ -1,0 +1,20 @@
+{# The date "stub": the memorable part of the design. Big day number, month, days left. #}
+{% macro stub(due, days) %}
+<div class="stub{% if days is not none and days <= 1 %} stub-urgent{% elif days is not none and days <= 5 %} stub-soon{% endif %}">
+  {% if due %}
+    <span class="stub-day">{{ due.day }}</span>
+    <span class="stub-month">{{ due.strftime('%b') }}</span>
+    <span class="stub-left">{{ days|left_text }}</span>
+  {% else %}
+    <span class="stub-none">No date</span>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{% macro chips(n) %}
+<p class="chips">
+  <span class="chip">{{ TYPE_LABELS.get(n.notice_type, 'Other') }}</span>
+  {% if n.match == 'maybe' %}<span class="chip chip-maybe">May apply to you</span>{% endif %}
+  {% if n.review_status == 'needs_review' %}<span class="chip chip-review">Needs review</span>{% endif %}
+</p>
+{% endmacro %}

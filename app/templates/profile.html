@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}My profile{% endblock %}
+{% block content %}
+<h1>{{ 'My profile' if user else 'Set up your profile' }}</h1>
+<p class="lede">Your course and semester decide which notices and reminders you see. Nothing you enter here is sent to any AI service.</p>
+
+<form method="post" class="form">
+  <input type="hidden" name="csrf" value="{{ csrf_token }}">
+
+  <label for="name">Name</label>
+  <input id="name" name="name" required maxlength="80" value="{{ form.get('name', user['name'] if user else '') }}">
+
+  <label for="email">Email</label>
+  <input id="email" name="email" type="email" required maxlength="120" value="{{ form.get('email', user['email'] if user else '') }}">
+
+  <label for="course">Course</label>
+  <select id="course" name="course" required>
+    <option value="">Choose your course</option>
+    {% set chosen = form.get('course', user['course'] if user else '') %}
+    {% for c in courses %}<option value="{{ c }}" {{ 'selected' if c == chosen }}>{{ c }}</option>{% endfor %}
+  </select>
+
+  <label for="semester">Semester</label>
+  <select id="semester" name="semester" required>
+    {% set chosen_sem = (form.get('semester', user['semester'] if user else '')|string) %}
+    <option value="">Choose your semester</option>
+    {% for s in range(1, 11) %}<option value="{{ s }}" {{ 'selected' if chosen_sem == s|string }}>{{ s }}</option>{% endfor %}
+  </select>
+
+  <label for="batch">Batch year <span class="muted">(optional, for example 2024)</span></label>
+  <input id="batch" name="batch" maxlength="12" value="{{ form.get('batch', (user['batch'] or '') if user else '') }}">
+
+  <label for="telegram_chat_id">Telegram chat ID <span class="muted">(optional, see docs/SETUP_GUIDE.md)</span></label>
+  <input id="telegram_chat_id" name="telegram_chat_id" inputmode="numeric" maxlength="25"
+         value="{{ form.get('telegram_chat_id', (user['telegram_chat_id'] or '') if user else '') }}">
+
+  <button class="button" type="submit">Save profile</button>
+</form>
+
+{% if user %}
+<section>
+  <h2>Your private link</h2>
+  <p>Open this link on another device to edit your profile. Keep it to yourself.</p>
+  <p><code class="breakable">{{ request.host_url }}u/{{ user['token'] }}</code></p>
+</section>
+<section>
+  <h2>Delete my data</h2>
+  <p>This removes your profile and all your reminders.</p>
+  <form method="post" action="{{ url_for('main.profile_delete') }}">
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <button class="button button-quiet" type="submit">Delete my profile</button>
+  </form>
+</section>
+{% endif %}
+{% endblock %}
