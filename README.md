@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # NoticeNest
 
 **Never miss a university deadline again.**
@@ -123,3 +124,6 @@ Respect each website's `robots.txt` and terms, keep the request delay, do not re
 ## License
 
 MIT, see [LICENSE](LICENSE).
+=======
+# notice-nest-
+>>>>>>> c78304a18122cdc29b687177e8fc4e295f55dd42
